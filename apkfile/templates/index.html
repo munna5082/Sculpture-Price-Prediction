@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+
+    <style>
+      body{
+        text-align: center;
+        background-color: #ee5522;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='169' height='169' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='100' y1='33' x2='100' y2='-3'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='100' y1='135' x2='100' y2='97'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='%23ca481d' fill-opacity='0.81'%3E%3Crect x='100' width='100' height='100'/%3E%3Crect y='100' width='100' height='100'/%3E%3C/g%3E%3Cg fill-opacity='0.81'%3E%3Cpolygon fill='url(%23a)' points='100 30 0 0 200 0'/%3E%3Cpolygon fill='url(%23b)' points='100 100 0 130 0 100 200 100 200 130'/%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      div.searchTerm {
+        width: 100%;
+        height: 36px;
+        position: relative;
+        display: flex;
+      }
+
+      input.searchTerm {
+        width: 100%;
+        border: 3px solid #00B4CC;
+        padding: 5px;
+        height: 27px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #9DBFAF;
+        font-size: 20px;
+      }
+
+      select.searchTerm {
+        width: 100%;
+        border: 3px solid #00B4CC;
+        padding: 5px;
+        height: 42px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #9DBFAF;
+        font-size: 20px;
+      }
+
+      input.searchTerm:focus{
+        color: #00B4CC;
+      }
+
+      button.searchButton {
+        width: 80px;
+        height: 36px;
+        border: 1px solid #00B4CC;
+        background: #00B4CC;
+        text-align: center;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 20px;
+      }
+
+      div.wrap{
+        width: 60%;
+        position: relative;
+        top: 20%;
+        left: 20%;
+      }
+
+      body.bg-image {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 300px;
+        max-height: 700px;
+      }
+
+      .bg-image[style^="background-image:"][style$=".svg)"] {
+        background-size: 400px 300px;
+        background-image: url(https://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg)
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Sculpture Price Prediction</h1>
+        <div class="searchTerm">
+          <input type="text" name="Name" class="searchTerm" placeholder="Name of the Artist">
+        </div><br>
+
+        <div class="searchTerm">
+          <input type="text" name="Repute" class="searchTerm" placeholder="Reputation of the Artist (0-1 range)">
+        </div><br>
+    
+        <div class="searchTerm">
+          <input type="text" name="Height" class="searchTerm" placeholder="Height of the Art (in Metres)">
+        </div><br>
+    
+        <div class="searchTerm">
+          <input type="text" name="Width" class="searchTerm" placeholder="Width of the Art (in Metres)">
+        </div><br>
+    
+        <div class="searchTerm">
+          <input type="text" name="Weight" class="searchTerm" placeholder="Weight of the Art (in grams)">
+        </div><br>
+    
+        <div class="searchTerm">
+          <select name="Material" class="searchTerm">
+            <option selected>Material Used</option>
+            <option value="0">Aluminium</option>
+            <option value="1">Brass</option>
+            <option value="2">Bronze</option>
+            <option value="3">Clay</option>
+            <option value="4">Marble</option>
+            <option value="5">Stone</option>
+            <option value="6">Wood</option>
+          </select>
+        </div><br>
+    
+        <div class="searchTerm">
+          <input type="text" name="BasePrice" class="searchTerm" placeholder="Base Price of the Art (in Dollars)">
+        </div><br>
+    
+        <div class="searchTerm">
+          <input type="text" name="BaseShippingPrice" class="searchTerm" placeholder="Base Shipping Price of the Art (in Dollars)">
+        </div><br>
+    
+        <div class="searchTerm">
+          <select name="ExpressShipment" class="searchTerm">
+            <option selected>Express Shipment Done</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div><br>
+    
+        <div class="searchTerm">
+          <select name="Transport" class="searchTerm">
+            <option selected>Transport Included</option>
+            <option value="0">Airways</option>
+            <option value="1">Roadways</option>
+            <option value="1">Waterways</option>
+          </select>
+        </div><br>
+    
+        <button type="submit" name="pred_button" class="searchButton"> Submit
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+      {% if error %}
+        <h2>Error Occured :{{ error }}</h2>
+        <a href="/">back to homepage</a>
+      {% endif %}
+    </div>
+  </body>
+</html>
